@@ -1,5 +1,6 @@
-# springboot-react-junit
-Portfolio Project to exhibit my backend &amp; frontend skills JUN 2022
+# This project was to exhibit my backend and frontend skills.
+### `FrontEnd:` https://github.com/jjsquackers/demo-frontend
+### `BackEnd:` https://github.com/jjsquackers/springboot-react-junit
 
 Technologies:
 * Spring Boot (JPA, Hibernate, Lombok, etc.)
