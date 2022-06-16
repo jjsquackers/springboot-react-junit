@@ -1,4 +1,4 @@
-package springreactjunit.demo;
+package springreactjunit.demo.model;
 
 public class Customer {
 

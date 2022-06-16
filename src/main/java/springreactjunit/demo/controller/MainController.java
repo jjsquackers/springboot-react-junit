@@ -1,7 +1,9 @@
-package springreactjunit.demo;
+package springreactjunit.demo.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import springreactjunit.demo.model.Customer;
+import springreactjunit.demo.model.Orders;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
