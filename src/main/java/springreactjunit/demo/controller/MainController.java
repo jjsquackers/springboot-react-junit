@@ -1,7 +1,7 @@
 package springreactjunit.demo.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.core.annotation.Order;
+import org.springframework.web.bind.annotation.*;
 import springreactjunit.demo.model.Customer;
 import springreactjunit.demo.model.Orders;
 
@@ -11,6 +11,7 @@ import java.util.List;
 
 
 @RestController
+@RequestMapping("/orders")
 public class MainController {
 
     @GetMapping("/main")
@@ -37,7 +38,11 @@ public class MainController {
 
         return orders;
     }
+    @PostMapping("/add")
+    public String addOrder(@RequestBody Orders order){
 
+        return "New order has been added";
+    }
 
 
 }

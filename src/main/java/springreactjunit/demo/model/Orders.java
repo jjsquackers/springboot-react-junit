@@ -1,9 +1,11 @@
 package springreactjunit.demo.model;
 
 
+import javax.persistence.Entity;
 import java.time.LocalDate;
 import java.util.List;
 
+@Entity
 public class Orders {
     String orderNo;
     LocalDate date;
