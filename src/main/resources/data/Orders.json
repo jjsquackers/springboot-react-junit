@@ -1,0 +1,16 @@
+{
+  "orderNo": "or15176166",
+  "date": "2022-07-04",
+  "custid": "cust15176166",
+  "customerList": [
+    {
+      "custid": "custId1858161",
+      "fname": "Fname",
+      "lname": "Lname",
+      "address": "Philippines",
+      "city": "Antipolo",
+      "state": "State",
+      "zip": "8610"
+    }
+  ]
+}
