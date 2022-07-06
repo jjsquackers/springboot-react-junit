@@ -14,10 +14,13 @@ import lombok.NoArgsConstructor;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.annotation.Order;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import springreactjunit.demo.controller.MainController;
+import springreactjunit.demo.model.Orders;
 import springreactjunit.demo.model.XMLFileStructureDto;
 
 import java.io.File;
@@ -92,20 +95,23 @@ public class XMLGenerator {
             return "ObjectList is empty";
         }
         try {
-            XMLFileStructureDto xmlFile = new XMLFileStructureDto();
-            List<Object> header = new ArrayList<>();
-            header.add("trial");
-            header.add("AWESOME!!!!!!");
-            header.add("HEHEHEHEH!!!!!!");
-            JSONArray s = new JSONArray(objectList.toString());
-            JSONObject tempJsonObject;
-            for (int i = 0; i < s.length(); i++) {
-                tempJsonObject = s.getJSONObject(i);
-                System.out.println(tempJsonObject);
-                System.out.println(tempJsonObject.getString("custid"));
-            }
-            xmlFile.setHeader(header);
-            xmlFile.setOrders(objectList);
+//            XMLFileStructureDto xmlFile = new XMLFileStructureDto();
+            MainController orders = new MainController();
+            ;
+
+//            List<Object> header = new ArrayList<>();
+//            header.add("trial");
+//            header.add("AWESOME!!!!!!");
+//            header.add("HEHEHEHEH!!!!!!");
+//            JSONArray s = new JSONArray(objectList.toString());
+//            JSONObject tempJsonObject;
+//            for (int i = 0; i < s.length(); i++) {
+//                tempJsonObject = s.getJSONObject(i);
+//                System.out.println(tempJsonObject);
+//                System.out.println(tempJsonObject.getString("custid"));
+//            }
+//            xmlFile.setHeader(header);
+//            xmlFile.setOrders(objectList);
 
             XmlMapper xmlMapper = new XmlMapper();
             xmlMapper.configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, true);
@@ -115,9 +121,9 @@ public class XMLGenerator {
             xmlMapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
             xmlMapper.setDateFormat(new SimpleDateFormat("dd/MM/yyyy"));
             xmlMapper.registerModule(new JavaTimeModule());
-            xmlMapper.writeValue(new File(getFilePath(filename)), xmlFile);
+            xmlMapper.writeValue(new File(getFilePath(filename)), orders.mainPage());
 
-            stringXML = xmlMapper.writeValueAsString(xmlFile);
+            stringXML = xmlMapper.writeValueAsString(orders.mainPage());
         } catch (Exception e) {
             e.printStackTrace();
         }
