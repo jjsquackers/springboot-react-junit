@@ -74,7 +74,7 @@ public class XMLGenerator {
 
     public ResponseEntity<JsonNode> generateXML() throws IOException {
         var om = new ObjectMapper();
-        var json = getDataFromJson("data/Orders.json");
+        var json = getDataFromJson("data/Sample.json");
         JsonNode jsonNode = om.readTree(json);
         List<Object> objectList = Arrays.asList(om.readValue(json, JsonNode.class));
         System.out.println("JSON STRING - genXMLTrial() " + jsonNode.toString());
@@ -95,23 +95,23 @@ public class XMLGenerator {
             return "ObjectList is empty";
         }
         try {
-//            XMLFileStructureDto xmlFile = new XMLFileStructureDto();
-            MainController orders = new MainController();
+            XMLFileStructureDto xmlFile = new XMLFileStructureDto();
+//            MainController orders = new MainController();
             ;
 
-//            List<Object> header = new ArrayList<>();
-//            header.add("trial");
-//            header.add("AWESOME!!!!!!");
-//            header.add("HEHEHEHEH!!!!!!");
-//            JSONArray s = new JSONArray(objectList.toString());
-//            JSONObject tempJsonObject;
-//            for (int i = 0; i < s.length(); i++) {
-//                tempJsonObject = s.getJSONObject(i);
-//                System.out.println(tempJsonObject);
+            List<Object> header = new ArrayList<>();
+            header.add("trial");
+            header.add("AWESOME!!!!!!");
+            header.add("HEHEHEHEH!!!!!!");
+            JSONArray s = new JSONArray(objectList.toString());
+            JSONObject tempJsonObject;
+            for (int i = 0; i < s.length(); i++) {
+                tempJsonObject = s.getJSONObject(i);
+                System.out.println(tempJsonObject);
 //                System.out.println(tempJsonObject.getString("custid"));
-//            }
-//            xmlFile.setHeader(header);
-//            xmlFile.setOrders(objectList);
+            }
+            xmlFile.setHeader(header);
+            xmlFile.setContent(objectList);
 
             XmlMapper xmlMapper = new XmlMapper();
             xmlMapper.configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, true);
@@ -121,9 +121,9 @@ public class XMLGenerator {
             xmlMapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
             xmlMapper.setDateFormat(new SimpleDateFormat("dd/MM/yyyy"));
             xmlMapper.registerModule(new JavaTimeModule());
-            xmlMapper.writeValue(new File(getFilePath(filename)), orders.mainPage());
+            xmlMapper.writeValue(new File(getFilePath(filename)), xmlFile);
 
-            stringXML = xmlMapper.writeValueAsString(orders.mainPage());
+            stringXML = xmlMapper.writeValueAsString(xmlFile);
         } catch (Exception e) {
             e.printStackTrace();
         }

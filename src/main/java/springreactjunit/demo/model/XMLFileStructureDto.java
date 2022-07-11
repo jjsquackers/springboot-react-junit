@@ -8,14 +8,14 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-@JacksonXmlRootElement(localName = "JUSTINE")
+@JacksonXmlRootElement(localName = "Response")
 public class XMLFileStructureDto {
 
-    @JacksonXmlProperty(localName = "HeaderXXXXX")
+    @JacksonXmlProperty(localName = "Header")
     private List<Object> header;
 
-    @JacksonXmlProperty(localName = "ContentXXX")
-    private List<Object> orders;
+    @JacksonXmlProperty(localName = "Content")
+    private List<Object> content;
 
 
 }
