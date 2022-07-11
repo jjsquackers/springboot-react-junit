@@ -1,8 +1,13 @@
 package springreactjunit.demo.configuration;
 
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
@@ -14,6 +19,11 @@ import java.util.Collections;
 
 @Configuration
 @EnableSwagger2
+//@EnableAutoConfiguration(
+//        exclude = {DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
+//@ComponentScan(basePackages = "springreactjunit.demo.*")
+//@EntityScan("springreactjunit.demo.*")
+//@EnableJpaRepositories(basePackages = "springreactjunit.demo.repository")
 public class SpringFoxConfig {
     /*
         Access swagger using URL: http://localhost:8080/swagger-ui.html

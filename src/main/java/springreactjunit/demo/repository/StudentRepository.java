@@ -2,10 +2,9 @@ package springreactjunit.demo.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import springreactjunit.demo.model.Orders;
+import springreactjunit.demo.model.Student;
 
 @Repository
-public interface OrderRepository extends JpaRepository<Orders,String> {
-
+public interface StudentRepository extends JpaRepository<Student, Integer> {
 
 }

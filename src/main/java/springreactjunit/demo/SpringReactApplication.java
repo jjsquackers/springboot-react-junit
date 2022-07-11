@@ -10,7 +10,6 @@ import springreactjunit.demo.service.XMLGenerator;
 import java.io.IOException;
 
 @SpringBootApplication
-@EnableSwagger2
 public class SpringReactApplication {
 
     public static void main(String[] args) {
@@ -22,12 +21,12 @@ public class SpringReactApplication {
 //		} catch (IOException e) {
 //			e.printStackTrace();
 //		}
-        JsonParser jsonParser = new JsonParser();
-        try {
-            jsonParser.parseJsonString();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        JsonParser jsonParser = new JsonParser();
+//        try {
+//            jsonParser.parseJsonString();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
     }
 
