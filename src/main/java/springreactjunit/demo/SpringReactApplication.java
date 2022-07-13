@@ -3,8 +3,11 @@ package springreactjunit.demo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.reactive.function.client.WebClient;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import springreactjunit.demo.service.JsonParser;
+import springreactjunit.demo.service.WebClientAPI;
 import springreactjunit.demo.service.XMLGenerator;
 
 import java.io.IOException;
@@ -14,6 +17,7 @@ public class SpringReactApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(SpringReactApplication.class, args);
+
 
 //		XMLGenerator xmlGenerator = new XMLGenerator();
 //		try {
@@ -29,5 +33,7 @@ public class SpringReactApplication {
 //        }
 
     }
+
+
 
 }

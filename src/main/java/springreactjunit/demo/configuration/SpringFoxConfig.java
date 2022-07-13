@@ -19,8 +19,8 @@ import java.util.Collections;
 
 @Configuration
 @EnableSwagger2
-//@EnableAutoConfiguration(
-//        exclude = {DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
+@EnableAutoConfiguration(
+        exclude = {DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
 //@ComponentScan(basePackages = "springreactjunit.demo.*")
 //@EntityScan("springreactjunit.demo.*")
 //@EnableJpaRepositories(basePackages = "springreactjunit.demo.repository")
