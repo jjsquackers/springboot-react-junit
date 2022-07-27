@@ -1,9 +1,8 @@
 package springreactjunit.demo.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -12,12 +11,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 import springreactjunit.demo.model.Customer;
+import springreactjunit.demo.model.OrderRequestBody;
 import springreactjunit.demo.model.Orders;
-import springreactjunit.demo.service.WebClientAPI;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -53,12 +51,6 @@ public class MainController {
         return orders;
     }
 
-    @PostMapping("/add")
-    public String addOrder(@RequestBody Orders order) {
-
-        return "New order has been added";
-    }
-
     @GetMapping("/consume")
     public ResponseEntity<?> consume() {
         try {
@@ -73,37 +65,58 @@ public class MainController {
         }
     }
 
+    /*
+        Configuring it to Spring Bean
+        Purpose: so that it will not be created everytime whenever it will be used on runtime.
+     */
     @Bean
     public WebClient.Builder getWebClientBuilder() {
         return WebClient.builder()
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
     }
 
+    // Normal initialization
+    private WebClient.Builder webClientBuilder = WebClient.builder();
 
-    private WebClient.Builder webClientBuilder = WebClient.builder()
-            .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
+    @GetMapping("/get/{id}")
+    public Object getParam(@PathVariable("id") String id) {
+        Object responseBody = new Object();
 
-    @GetMapping("/web")
-    public Object executeWebClient() {
         return webClientBuilder.build()
                 .get()
-//                .uri("http://localhost:8080/orders/main")
-                .uri("http://jsonplaceholder.typicode.com/users")
+                .uri("https://jsonplaceholder.typicode.com/posts/" + id)
                 .retrieve()
                 .bodyToMono(Object.class)
                 .block();
     }
 
+    //    @RequestMapping(value = "/add", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+    @PostMapping("/add")
+    public String addOrder(@RequestBody OrderRequestBody orderRequestBody) {
+
+        return "New order has been added: " + orderRequestBody.toString();
+    }
+
     @PostMapping("/post")
-    public Object post() {
-        Object responseBody = new Object();
+    public String postAndRequestBody(@RequestBody OrderRequestBody orderRequestBody) {
+
         return webClientBuilder.build()
                 .post()
-                .uri("http://jsonplaceholder.typicode.com/users")
-                .bodyValue(responseBody)
+                .uri("http://localhost:8080/orders/add")
+                .bodyValue(orderRequestBody)
                 .retrieve()
-                .bodyToMono(Object.class)
+                .bodyToMono(String.class)
                 .block();
+    }
 
+    public String testWebClientGETPARAM(String caseId) {
+        WebClient.Builder webClientBuilder = WebClient.builder();
+
+        return webClientBuilder.build()
+                .get()
+                .uri("http://localhost: 8069/cas/ad/transfer/internal/v1/trustee/transferData/view/{caseId}?caseId="+caseId)
+                .retrieve()
+                .bodyToMono(String.class)
+                .block();
     }
 }
